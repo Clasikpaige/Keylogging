@@ -47,16 +47,6 @@ Compile the keylogger.py into an executable using pyinstaller:
 
 The executable will be located in keylogger/dist/.
 
-## Prerequisites
-
-Before you get started, ensure you have the following:
-
-- Python 3.x
-- `pyinstaller` for compiling the keylogger
-- `PyPDF2` for manipulating PDFs
-- Flask for running the server
-- A PDF reader that supports JavaScript (like Adobe Acrobat)
-
 ## Platform Compatibility
 
 This setup primarily works on Windows due to the use of ActiveXObject in the JavaScript code for PDF. However, the keylogger script itself can be adapted to work on Linux and macOS with some modifications, but the PDF execution part will need a different approach as ActiveX is not supported on these platforms. 
