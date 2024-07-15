@@ -8,7 +8,7 @@ Welcome to the Keylogger PDF Embed Project! This guide will walk you through set
 
 ## Table of Contents
 
-- [Introduction](#introduction
+- [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
 - [Platform Compatibility](#platform-compatibility)
 
