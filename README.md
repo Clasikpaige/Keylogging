@@ -8,12 +8,8 @@ Welcome to the Keylogger PDF Embed Project! This guide will walk you through set
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Repository Structure](#repository-structure)
+- [Introduction](#introduction
 - [Prerequisites](#prerequisites)
-- [Setting Up the Keylogger](#setting-up-the-keylogger)
-- [Creating the Malicious PDF](#creating-the-malicious-pdf)
-- [Setting Up the Server](#setting-up-the-server)
 - [Platform Compatibility](#platform-compatibility)
 
 ## Introduction
