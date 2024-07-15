@@ -37,6 +37,16 @@ pyinstaller --onefile keylogger.py
 ```
 
 This will generate `keylogger/dist/keylogger.exe`.
+## Create the Keylogger Executable
+
+Compile the keylogger.py into an executable using pyinstaller:
+
+```cd keylogger```
+```pip install pyinstaller```
+```pyinstaller --onefile keylogger.py```
+
+The executable will be located in keylogger/dist/.
+
 
 ## Platform Compatibility
 
