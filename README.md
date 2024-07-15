@@ -2,10 +2,6 @@
 
 ---
 
-## Keylogger PDF Embed Project
-
-Welcome to the Keylogger PDF Embed Project! This guide will walk you through setting up a keylogger embedded within a PDF file. We'll cover everything from creating the keylogger script, generating a malicious PDF, and setting up a server to log keystrokes. Let’s get started!
-
 ## Table of Contents
 
 - [Introduction](#introduction)
