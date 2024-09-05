@@ -1,3 +1,12 @@
+# Flask server dependencies
+Flask==2.0.2
+
+# Keylogger dependencies
 pynput==1.7.6
-requests==2.31.0
-Flask==2.3.2
+requests==2.26.0
+
+# Windows-specific libraries for detecting active window (optional)
+pywin32==302
+
+# For background execution on Windows (optional)
+subprocess32==3.5.4
