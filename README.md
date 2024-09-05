@@ -17,7 +17,7 @@ This project consists of a keylogger that captures keystrokes and sends them to 
     - [2. Running the Flask Server](#2-running-the-flask-server)
     - [3. Running the Keylogger](#3-running-the-keylogger)
 5. [Dependencies](#dependencies)
-6. [Security Considerations](#security-considerations)
+
 
 ---
 
