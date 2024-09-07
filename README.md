@@ -28,7 +28,6 @@ This repository consists of two main components:
 1. **Keylogger**: A Python-based keylogger that captures keystrokes, accumulates them into words, and sends them to a remote server at regular intervals.
 2. **Flask Server**: A server-side component that receives the keystrokes and stores them in a log file. The server listens for POST requests from the keylogger and handles logging accordingly.
 
-The goal is to create a persistent and stealthy logging system that can log keypresses in a real-world scenario while being difficult to detect.
 
 ---
 
