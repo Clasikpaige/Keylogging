@@ -1,5 +1,5 @@
-Flask==2.0.2
-pynput==1.7.6
-requests==2.26.0
-pywin32==302
-subprocess32==3.5.4 
+Flask
+pynput
+requests
+pywin32
+subprocess32
