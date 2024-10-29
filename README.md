@@ -127,16 +127,3 @@ pip install -r requirements.txt
 
 ---
 
-### Security Considerations
-
-1. **Stealth Execution**: If you're converting the keylogger to an executable (`.exe`) for distribution, consider using obfuscation techniques to make detection more difficult.
-   
-2. **Network Security**: It is **strongly recommended** to use HTTPS instead of HTTP for transmitting sensitive information like keystrokes over the network. Consider deploying the server behind a TLS/SSL certificate to ensure secure data transmission.
-
-3. **Authentication**: This implementation does not include any form of authentication. For increased security, add API token-based authentication to the `/log` endpoint to prevent unauthorized access.
-
-4. **VM/Sandbox Detection**: Consider extending the keylogger to detect if it's running in a virtual machine or sandbox environment, which is often used for malware analysis.
-
----
-
-
